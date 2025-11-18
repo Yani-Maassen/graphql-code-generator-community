@@ -22,7 +22,7 @@ describe('arrayWrap:', () => {
 });
 
 test('method: nodeIsObjectType() => returns true if node is an ObjectType', () => {
-  const expected = [false, true, true, false, true, true, false];
+  const expected = [false, true, true, true, true, true, false];
   expect(nodes.map(nodeIsObjectType)).toEqual(expected);
 });
 
