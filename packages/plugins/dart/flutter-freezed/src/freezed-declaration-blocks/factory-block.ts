@@ -1,4 +1,4 @@
-import { FieldDefinitionNode, InputValueDefinitionNode } from 'graphql';
+import { FieldDefinitionNode, InputValueDefinitionNode, Kind } from 'graphql';
 import { indent } from '@graphql-codegen/visitor-plugin-common';
 import { Config } from '../config/config-value.js';
 import { TypeName } from '../config/pattern.js';
@@ -35,7 +35,7 @@ export class FactoryBlock {
 
     block += this.buildDecorators(config, blockAppliesOn, className, factoryName);
 
-    block += this.buildHeader(config, blockAppliesOn, className, factoryName);
+    block += this.buildHeader(config, blockAppliesOn, className, node, factoryName);
 
     block += this.buildBody(config, node, blockAppliesOn);
 
@@ -67,6 +67,7 @@ export class FactoryBlock {
     config: FlutterFreezedPluginConfig,
     blockAppliesOn: readonly AppliesOnFactory[],
     className: TypeName,
+    node: ObjectType,
     factoryName?: TypeName,
   ) => {
     const typeName = factoryName
@@ -74,9 +75,9 @@ export class FactoryBlock {
       : className;
 
     const immutable = Config.immutable(config, typeName);
-    // const mutableInputs = Config.mutableInputs(config, factoryName);
-    // const mutable = immutable !== true || (node.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION && mutableInputs);
-    const constFactory = immutable ? indent('const factory') : indent('factory');
+    const mutableInputs = Config.mutableInputs(config, factoryName);
+    const mutable = immutable !== true || (node.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION && mutableInputs);
+    const constFactory = mutable ? indent('factory') : indent('const factory');
     const _className = Block.buildBlockName(
       config,
       blockAppliesOn,
