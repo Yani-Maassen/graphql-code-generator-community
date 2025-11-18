@@ -3,6 +3,7 @@ import {
   FieldDefinitionNode,
   InputObjectTypeDefinitionNode,
   InputValueDefinitionNode,
+  InterfaceTypeDefinitionNode,
   ObjectTypeDefinitionNode,
   UnionTypeDefinitionNode,
 } from 'graphql';
@@ -730,11 +731,12 @@ export type NodeType =
   | ObjectTypeDefinitionNode
   | InputObjectTypeDefinitionNode
   | UnionTypeDefinitionNode
-  | EnumTypeDefinitionNode;
+  | EnumTypeDefinitionNode
+  | InterfaceTypeDefinitionNode;
 
 export type FieldType = FieldDefinitionNode | InputValueDefinitionNode;
 
-export type ObjectType = ObjectTypeDefinitionNode | InputObjectTypeDefinitionNode;
+export type ObjectType = ObjectTypeDefinitionNode | InputObjectTypeDefinitionNode | InterfaceTypeDefinitionNode;
 
 export type ConfigOption = keyof FlutterFreezedPluginConfig;
 export type FreezedOption = Extract<

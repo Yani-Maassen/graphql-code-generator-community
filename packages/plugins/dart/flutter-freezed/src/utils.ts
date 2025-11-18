@@ -3,6 +3,7 @@ import { camelCase, pascalCase, snakeCase } from 'change-case-all';
 import {
   DefinitionNode,
   InputObjectTypeDefinitionNode,
+  InterfaceTypeDefinitionNode,
   Kind,
   ObjectTypeDefinitionNode,
 } from 'graphql';
@@ -25,8 +26,8 @@ export const resetIndex = (regexp: RegExp) => (regexp.lastIndex = 0);
 
 export const nodeIsObjectType = (
   node: DefinitionNode,
-): node is ObjectTypeDefinitionNode | InputObjectTypeDefinitionNode =>
-  node.kind === Kind.OBJECT_TYPE_DEFINITION || node.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION;
+): node is ObjectTypeDefinitionNode | InputObjectTypeDefinitionNode | InterfaceTypeDefinitionNode =>
+  node.kind === Kind.OBJECT_TYPE_DEFINITION || node.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION || node.kind === Kind.INTERFACE_TYPE_DEFINITION;
 
 export const appliesOnBlock = <T extends AppliesOn>(
   configAppliesOn: T[],
