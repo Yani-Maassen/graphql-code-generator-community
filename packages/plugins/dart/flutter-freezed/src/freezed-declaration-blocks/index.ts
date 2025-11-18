@@ -26,8 +26,8 @@ export class Block {
     const target = segments[segments.length - 1];
     const expectedFileName = snakeCase(target.replace(/\.dart/g, ''));
     return [
-      `import 'package:freezed_annotation/freezed_annotation.dart';\n`,
-      `import 'package:flutter/foundation.dart';\n\n`,
+      `import 'package:flutter/foundation.dart';\n`,
+      `import 'package:freezed_annotation/freezed_annotation.dart';\n\n`,
       `part '${expectedFileName}.freezed.dart';\n`,
       `part '${expectedFileName}.g.dart';\n\n`,
     ].join('');
@@ -87,6 +87,9 @@ export class Block {
   ): string => {
     identifier = dartCasing(identifier, blockCasing);
 
+    if (identifier.length === 0) {
+      return 'value';
+    }
     if (isDartKeyword(identifier)) {
       return escapeDartKeyword(config, blockAppliesOn, identifier, typeName, fieldName);
     }

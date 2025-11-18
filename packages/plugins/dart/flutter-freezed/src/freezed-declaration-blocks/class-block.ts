@@ -92,7 +92,7 @@ export class ClassBlock {
       ? indent(`const ${_className}._();\n\n`)
       : '';
 
-    return `class ${_className} with _$${_className} {\n${privateEmptyConstructor}`;
+    return `sealed class ${_className} with _$${_className} {\n${privateEmptyConstructor}`;
   };
 
   public static buildBody = (config: FlutterFreezedPluginConfig, node: NodeType): string => {

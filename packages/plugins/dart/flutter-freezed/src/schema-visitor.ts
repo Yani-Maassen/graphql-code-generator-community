@@ -2,6 +2,7 @@ import {
   EnumTypeDefinitionNode,
   GraphQLSchema,
   InputObjectTypeDefinitionNode,
+  InterfaceTypeDefinitionNode,
   ObjectTypeDefinitionNode,
   UnionTypeDefinitionNode,
 } from 'graphql';
@@ -23,6 +24,9 @@ export const schemaVisitor = (_schema: GraphQLSchema, config: FlutterFreezedPlug
       Block.build(config, node, nodeRepository),
 
     InputObjectTypeDefinition: (node: InputObjectTypeDefinitionNode) =>
+      Block.build(config, node, nodeRepository),
+
+    InterfaceTypeDefinition: (node: InterfaceTypeDefinitionNode) =>
       Block.build(config, node, nodeRepository),
   };
 };

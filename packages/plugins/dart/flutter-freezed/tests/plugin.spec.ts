@@ -32,8 +32,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('using the default plugin configuration: Enum values are camelCased and values that are keywords are escaped by suffixing the value with an `_`', () => {
       const output = plugin(enumSchema, [], Config.create());
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -74,8 +74,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('when config.camelCasedEnums === undefined: original casing is preserved, keywords are escaped', () => {
       expect(plugin(enumSchema, [], Config.create({ camelCasedEnums: undefined })))
         .toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -108,8 +108,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('when config.camelCasedEnums === DartIdentifierCasing: Enum values are cased as configured, keywords are escaped', () => {
       const output = plugin(enumSchema, [], Config.create({ camelCasedEnums: 'PascalCase' }));
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -152,14 +152,14 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('@freezed: using the default plugin configuration: generates the expected output', () => {
       const output = plugin(simpleSchema, [], Config.create());
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
 
         @freezed
-        class Person with _$Person {
+        sealed class Person with _$Person {
           const Person._();
 
           const factory Person({
@@ -183,8 +183,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }),
       );
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -194,7 +194,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
           equal: true,
           makeCollectionsUnmodifiable: true,
         )
-        class Person with _$Person {
+        sealed class Person with _$Person {
           const Person._();
 
           const factory Person({
@@ -216,14 +216,14 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }),
       );
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
 
         @unfreezed
-        class Person with _$Person {
+        sealed class Person with _$Person {
           const Person._();
 
           factory Person({
@@ -246,8 +246,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }),
       );
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -255,7 +255,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         @Freezed(
           copyWith: false,
         )
-        class Person with _$Person {
+        sealed class Person with _$Person {
           const Person._();
 
           factory Person({
@@ -283,14 +283,14 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }),
       );
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
 
         @freezed
-        class Movie with _$Movie {
+        sealed class Movie with _$Movie {
           const Movie._();
 
           const factory Movie({
@@ -298,16 +298,16 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
             required String title,
           }) = _Movie;
 
-          const factory Movie.createMovieInput({
+          factory Movie.createMovieInput({
             required String title,
           }) = CreateMovieInput;
 
-          const factory Movie.updateMovieInput({
+          factory Movie.updateMovieInput({
             required String id,
             String? title,
           }) = UpdateMovieInput;
 
-          const factory Movie.upsertMovieInput({
+          factory Movie.upsertMovieInput({
             required String id,
             required String title,
           }) = UpsertMovieInput;
@@ -316,10 +316,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class CreateMovieInput with _$CreateMovieInput {
+        sealed class CreateMovieInput with _$CreateMovieInput {
           const CreateMovieInput._();
 
-          const factory CreateMovieInput({
+          factory CreateMovieInput({
             required String title,
           }) = _CreateMovieInput;
 
@@ -327,10 +327,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class UpsertMovieInput with _$UpsertMovieInput {
+        sealed class UpsertMovieInput with _$UpsertMovieInput {
           const UpsertMovieInput._();
 
-          const factory UpsertMovieInput({
+          factory UpsertMovieInput({
             required String id,
             required String title,
           }) = _UpsertMovieInput;
@@ -339,10 +339,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class UpdateMovieInput with _$UpdateMovieInput {
+        sealed class UpdateMovieInput with _$UpdateMovieInput {
           const UpdateMovieInput._();
 
-          const factory UpdateMovieInput({
+          factory UpdateMovieInput({
             required String id,
             String? title,
           }) = _UpdateMovieInput;
@@ -351,10 +351,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class DeleteMovieInput with _$DeleteMovieInput {
+        sealed class DeleteMovieInput with _$DeleteMovieInput {
           const DeleteMovieInput._();
 
-          const factory DeleteMovieInput({
+          factory DeleteMovieInput({
             required String id,
           }) = _DeleteMovieInput;
 
@@ -366,8 +366,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('using unionTypes: generates the expected output', () => {
       const output = plugin(unionSchema, [], Config.create({}));
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -382,7 +382,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Actor with _$Actor {
+        sealed class Actor with _$Actor {
           const Actor._();
 
           const factory Actor({
@@ -394,7 +394,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Starship with _$Starship {
+        sealed class Starship with _$Starship {
           const Starship._();
 
           const factory Starship({
@@ -407,7 +407,21 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Human with _$Human {
+        sealed class Character with _$Character {
+          const Character._();
+
+          const factory Character({
+            required String id,
+            required String name,
+            List<Character?>? friends,
+            required List<Episode?> appearsIn,
+          }) = _Character;
+
+          factory Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
+        }
+
+        @freezed
+        sealed class Human with _$Human {
           const Human._();
 
           const factory Human({
@@ -422,7 +436,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Droid with _$Droid {
+        sealed class Droid with _$Droid {
           const Droid._();
 
           const factory Droid({
@@ -437,7 +451,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class SearchResult with _$SearchResult {
+        sealed class SearchResult with _$SearchResult {
           const SearchResult._();
 
           const factory SearchResult.human({
@@ -470,17 +484,17 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('works with cyclic schema: generates the expected output', () => {
       const output = plugin(cyclicSchema, [], Config.create({}));
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
 
         @unfreezed
-        class BaseAInput with _$BaseAInput {
+        sealed class BaseAInput with _$BaseAInput {
           const BaseAInput._();
 
-          const factory BaseAInput({
+          factory BaseAInput({
             required BaseBInput b,
           }) = _BaseAInput;
 
@@ -488,10 +502,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class BaseBInput with _$BaseBInput {
+        sealed class BaseBInput with _$BaseBInput {
           const BaseBInput._();
 
-          const factory BaseBInput({
+          factory BaseBInput({
             required BaseCInput c,
           }) = _BaseBInput;
 
@@ -499,10 +513,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class BaseCInput with _$BaseCInput {
+        sealed class BaseCInput with _$BaseCInput {
           const BaseCInput._();
 
-          const factory BaseCInput({
+          factory BaseCInput({
             required BaseAInput a,
           }) = _BaseCInput;
 
@@ -510,7 +524,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Base with _$Base {
+        sealed class Base with _$Base {
           const Base._();
 
           const factory Base({
@@ -525,17 +539,17 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('escapes types with Dart keywords: generates the expected output', () => {
       const output = plugin(escapedSchema, [], Config.create({}));
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
 
         @unfreezed
-        class Enum_ with _$Enum_ {
+        sealed class Enum_ with _$Enum_ {
           const Enum_._();
 
-          const factory Enum_({
+          factory Enum_({
             @JsonKey(name: 'is')
             String? is_,
             @JsonKey(name: 'in')
@@ -546,10 +560,10 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class List_ with _$List_ {
+        sealed class List_ with _$List_ {
           const List_._();
 
-          const factory List_({
+          factory List_({
             String? map,
             @JsonKey(name: 'implements')
             String? implements_,
@@ -561,17 +575,17 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Object_ with _$Object_ {
+        sealed class Object_ with _$Object_ {
           const Object_._();
 
-          const factory Object_.enum_({
+          factory Object_.enum_({
             @JsonKey(name: 'is')
             String? is_,
             @JsonKey(name: 'in')
             String? in_,
           }) = Enum_;
 
-          const factory Object_.list({
+          factory Object_.list({
             String? map,
             @JsonKey(name: 'implements')
             String? implements_,
@@ -587,14 +601,14 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
     it('handles custom scalars and nested lists: generates the expected output', () => {
       const output = plugin(nonNullableListWithCustomScalars, [], Config.create({}));
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
 
         @freezed
-        class ComplexType with _$ComplexType {
+        sealed class ComplexType with _$ComplexType {
           const ComplexType._();
 
           const factory ComplexType({
@@ -658,8 +672,8 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }),
       );
       expect(output).toMatchInlineSnapshot(`
-        "import 'package:freezed_annotation/freezed_annotation.dart';
-        import 'package:flutter/foundation.dart';
+        "import 'package:flutter/foundation.dart';
+        import 'package:freezed_annotation/freezed_annotation.dart';
 
         part 'app_models.freezed.dart';
         part 'app_models.g.dart';
@@ -674,7 +688,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @unfreezed
-        class Actor with _$Actor {
+        sealed class Actor with _$Actor {
           const Actor._();
 
           factory Actor({
@@ -697,7 +711,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Starship with _$Starship {
+        sealed class Starship with _$Starship {
           const Starship._();
 
           const factory Starship({
@@ -709,8 +723,23 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
           factory Starship.fromJson(Map<String, dynamic> json) => _$StarshipFromJson(json);
         }
 
+        @freezed
+        sealed class Character with _$Character {
+          const Character._();
+
+          const factory Character({
+            required final String id,
+            required final String name,
+            List<Character?>? friends,
+            @Default([])
+            required List<Episode?> appearsIn,
+          }) = _Character;
+
+          factory Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
+        }
+
         @unfreezed
-        class Human with _$Human {
+        sealed class Human with _$Human {
           const Human._();
 
           factory Human({
@@ -731,7 +760,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class Droid with _$Droid {
+        sealed class Droid with _$Droid {
           const Droid._();
 
           const factory Droid({
@@ -747,7 +776,7 @@ describe('The Flutter Freezed plugin produces Freezed models using a GraphQL Sch
         }
 
         @freezed
-        class SearchResult with _$SearchResult {
+        sealed class SearchResult with _$SearchResult {
           const SearchResult._();
 
           const factory SearchResult.human({
